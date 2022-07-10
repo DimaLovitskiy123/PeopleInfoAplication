@@ -1,13 +1,23 @@
 package ru.mitya.model;
 
+import java.time.LocalDate;
+
 public class Person {
 
     private String firstName;
     private String lastName;
     private int age;
-    private String dateOfBirth;
+    private int id;
+    private LocalDate dateOfBirth;
 
-    public Person(String firstName, String lastName, String dateOfBirth) {
+    public Person(String firstName, String lastName, LocalDate dateOfBirth, int id) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+        this.id = id;
+    }
+
+    public Person(String firstName, String lastName, LocalDate dateOfBirth) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
@@ -33,14 +43,6 @@ public class Person {
         this.lastName = lastName;
     }
 
-    public String getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
     public int getAge() {
         return age;
     }
@@ -49,13 +51,30 @@ public class Person {
         this.age = age;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", age=" + age +
-                ", dateOfBirth='" + dateOfBirth + '\'' +
+                ", id=" + id +
+                ", yearOfBirth=" + dateOfBirth +
                 '}';
     }
 }

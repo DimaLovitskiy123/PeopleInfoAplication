@@ -2,9 +2,13 @@ package ru.mitya.dao;
 
 import ru.mitya.model.Person;
 
-import java.util.List;
+import java.util.Collection;
 
 public interface PersonDao {
-    void save(Person person);
-    List<Person> findAll();
+    Person save(Person person);
+    Collection<Person> findAll();
+    Person findById(int id);
+    Person deleteById(int id);
+    Person update(int id, Person person);
+    void deleteAll();
 }

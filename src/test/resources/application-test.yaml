@@ -1,0 +1,9 @@
+databaseProperties:
+  url: jdbc:h2:mem:testdb
+  user: sa
+  password: ""
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password: ""

@@ -44,8 +44,8 @@ public class PeopleController {
     }
 
     @DeleteMapping("/people/{id}")
-    public PersonDto deleteById(@PathVariable(name = "id") int id){
-        return personDtoConverter.toDto(peopleService.deleteById(id));
+    public void deleteById(@PathVariable(name = "id") int id){
+        peopleService.deleteById(id);
     }
 
     @PutMapping("/people/{id}")

@@ -8,7 +8,7 @@ public interface PersonDao {
     Person save(Person person);
     Collection<Person> findAll();
     Person findById(int id);
-    Person deleteById(int id);
+    void deleteById(int id);
     Person update(int id, Person person);
     void deleteAll();
 }

@@ -11,7 +11,7 @@ import java.util.Collection;
 
 //@Service = @Component
 @Service
-public class PeopleServiceImpl implements PeopleService{
+public class PeopleServiceImpl implements PeopleService {
 
     @Autowired
     private PersonDao dao;
@@ -25,6 +25,7 @@ public class PeopleServiceImpl implements PeopleService{
     @Override
     public Person update(int id, Person person) {
         person.setAge(calculateAge(person.getDateOfBirth()));
+        person.setId(id);
         return dao.update(id, person);
     }
 
@@ -39,14 +40,13 @@ public class PeopleServiceImpl implements PeopleService{
     }
 
     @Override
-    public Person deleteById(int id) {
-        return dao.deleteById(id);
+    public void deleteById(int id) {
+        dao.deleteById(id);
     }
 
-    private int calculateAge(LocalDate dateOfBirth){
+    private int calculateAge(LocalDate dateOfBirth) {
         return Period.between(dateOfBirth, LocalDate.now()).getYears();
     }
 }
 
-//TODO: 1)доделать метод ToDto в Converter, онвертировать все 5 полей
-//TODO: 2)написать тест для toDto
+//TODO: 1)

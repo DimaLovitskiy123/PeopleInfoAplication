@@ -1,25 +1,46 @@
 package ru.mitya.dao;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import ru.mitya.TestDataProvider;
+import ru.mitya.dbutil.DatabaseConnector;
 import ru.mitya.model.Person;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 @SpringBootTest
+@ActiveProfiles("test")
 class PersonDaoTest {
 
     @Autowired
     private PersonDao personDao;
+    @Autowired
+    private DatabaseConnector connectorH2;
 
     @AfterEach
     void deleteAll(){
         personDao.deleteAll();
+    }
+
+    @BeforeEach
+    public void createTable(){
+        try {
+            Connection connection = connectorH2.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("create table person(\n" +
+                    "id serial primary key,\n" +
+                    "first_name text,\n" +
+                    "last_name text,\n" +
+                    "age integer,\n" +
+                    "date_of_birth date\n" +
+                    ");");
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Test
@@ -29,11 +50,6 @@ class PersonDaoTest {
         Person foundPerson = personDao.findById(id);
         Assertions.assertEquals(personToSave, foundPerson);
         Assertions.assertEquals(1, personDao.findAll().size());
-    }
-
-    @Test
-    void test(){
-
     }
 
     @Test
@@ -55,9 +71,9 @@ class PersonDaoTest {
 
     @Test
     void deleteByIdTest(){
-        personDao.save(TestDataProvider.createPerson());
-        personDao.save(TestDataProvider.createPerson());
-        personDao.deleteById(1);
+        Person person1 = personDao.save(TestDataProvider.createPerson());
+        Person person2 = personDao.save(TestDataProvider.createPerson());
+        personDao.deleteById(person2.getId());
         Assertions.assertEquals(1, personDao.findAll().size());
     }
 }

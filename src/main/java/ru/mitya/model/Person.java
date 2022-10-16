@@ -1,6 +1,7 @@
 package ru.mitya.model;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Person {
 
@@ -76,5 +77,18 @@ public class Person {
                 ", id=" + id +
                 ", yearOfBirth=" + dateOfBirth +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return getAge() == person.getAge() && getId() == person.getId() && Objects.equals(getFirstName(), person.getFirstName()) && Objects.equals(getLastName(), person.getLastName()) && Objects.equals(getDateOfBirth(), person.getDateOfBirth());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getFirstName(), getLastName(), getAge(), getId(), getDateOfBirth());
     }
 }

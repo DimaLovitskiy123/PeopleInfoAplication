@@ -7,6 +7,6 @@ import java.time.LocalDate;
 public class TestDataProvider {
 
     public static Person createPerson(){
-        return new Person("Дима", "Ловицкий", LocalDate.of(2009, 9, 20));
+        return new Person("Dima", "Lovitskiy", LocalDate.of(2009, 9, 20));
     }
 }

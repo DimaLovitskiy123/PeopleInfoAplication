@@ -1,0 +1,9 @@
+databaseProperties:
+  url: jdbc:postgresql://localhost:5432/people_info
+  user: postgres
+  password: postgres
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/people_info
+    username: postgres
+    password: postgres
